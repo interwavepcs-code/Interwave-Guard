@@ -85,6 +85,25 @@ systemctl enable --now nginx
 
 echo "[9/9] Final cleanup..."
 systemctl enable unattended-upgrades
+echo "[FINAL] Installing Interwave Guard app..."
+
+# Create app directory
+mkdir -p /opt/interwave
+
+# Download Flask app
+curl -fsSL https://raw.githubusercontent.com/interwavepcs-code/Interwave-Guard/main/appliance/app.py \
+  -o /opt/interwave/app.py
+
+chmod +x /opt/interwave/app.py
+
+# Install systemd service
+curl -fsSL https://raw.githubusercontent.com/interwavepcs-code/Interwave-Guard/main/appliance/interwave-wizard.service \
+  -o /etc/systemd/system/interwave-wizard.service
+
+# Enable and start service
+systemctl daemon-reload
+systemctl enable interwave-wizard
+systemctl start interwave-wizard
 
 echo "===================================="
 echo " Installation complete!"
