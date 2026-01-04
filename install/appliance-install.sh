@@ -109,3 +109,5 @@ echo "===================================="
 echo " Installation complete!"
 echo " Reboot recommended."
 echo "===================================="
+reboot
+
