@@ -1,0 +1,13 @@
+[Unit]
+Description=Interwave Guard Setup Wizard
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/python3 /opt/interwave/app.py
+Restart=always
+RestartSec=3
+User=root
+
+[Install]
+WantedBy=multi-user.target
